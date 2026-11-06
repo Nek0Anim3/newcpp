@@ -1,6 +1,10 @@
 #include <stdio.h>
+#include <unistd.h>
+#include "../include/projectdata.h"
+#include <stdlib.h>
 
 int main() {
-    printf("C/CPP Hello!\n");
-    return 0;
+     int success = createProject();
+     return 0;
+    
 }
