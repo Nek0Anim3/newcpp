@@ -4,7 +4,16 @@
 #include <stdlib.h>
 
 int main() {
-     int success = createProject();
+     ProjectData *projData = (ProjectData *)calloc(1, sizeof(ProjectData));
+     printf("New project creation...\n");
+     setProjectName(projData);
+     printf("Select language:\n 0 - C Language (default)\n 1 - C++\nInput (0 or 1) > ");
+     setProjectType(projData);
+     printf("\nSpecify directory for project (enter = current dir)\nInput (absolute) > ");
+     setProjectPath(projData);
+     printf("\nShould project use CMake tool?\n 0 - No\n 1 - Yes (default)\nInput (0 or 1) > ");
+     setUseCmake(projData);
+     int success = createProject(projData);
      return 0;
     
 }

@@ -1,4 +1,5 @@
 #include "../include/projectdata.h"
+#include <stdbool.h>
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
@@ -37,19 +38,22 @@ void setProjectType(ProjectData *data) {
   
      while (1) {
           fgets(buffer, 16, stdin);
-          if (buffer[0] == '0') {
-               data->type = PTYPE_C;
-               strncpy(typeText, "Plain C", 16);
-               break;
-          } else if (buffer[0] == '1') {
-               data->type = PTYPE_CXX;
-               strncpy(typeText, "C++", 16);
-               break;
-          } else {
-               printf("Not valid. Type 0 or 1...\n");
-               printf("Input (0 or 1) > ");
-               continue;
+          switch (buffer[0]) {
+              case '\n':
+              case '0':
+                   data->type = PTYPE_C;
+                   strncpy(typeText, "Plain C", 16);
+                   break;
+              case '1':
+                   data->type = PTYPE_CXX;
+                   strncpy(typeText, "C++", 16);
+                   break;
+              default:
+                   printf("Not valid. Type 0 or 1...\n");
+                   printf("Input (0 or 1) > ");
+                   continue;
           }
+          break;
      }
      if (data->type == 0 || data->type == 1) {
           printf(GREEN "[+] Set Project Type: %s\n" RESET, typeText);
@@ -65,17 +69,40 @@ void setProjectPath(ProjectData *data) {
      }
 }
 
+void setUseCmake(ProjectData *data) {
+     char buffer[16];
+     char typeText[16];
+  
+     while (1) {
+          fgets(buffer, 16, stdin);
+          switch (buffer[0]) {
+              case '\n':
+              case '1':
+                   data->useCmake = true;
+                   strncpy(typeText, "Yes", 16);
+                   break;
+              case '0':
+                   data->useCmake = false;
+                   strncpy(typeText, "No", 16);
+                   break;
+              default:
+                   printf("Not valid. Type 0 or 1...\n");
+                   printf("Input (0 or 1) > ");
+                   continue;
+          }
+          break;
+     }
+     if (data->useCmake == 0) {
+          printf(RED "[-] Use Cmake?: %s\n" RESET, typeText);
+     } else {
+          printf(GREEN "[+] Use Cmake?: %s\n" RESET, typeText);
+     }
+}
+
 void printProjectData(ProjectData *data) {
      printf("Project '%s':\n  Language -- %s\n  Path -- %s\n", data->name, "STUB REMOVEPLS", data->pathdata->path);
 }
 
-int createProject() {
-     ProjectData *projData = (ProjectData *)calloc(1, sizeof(ProjectData));
-     printf("New project creation...\n");
-     setProjectName(projData);
-     printf("\nSelect language:\n 0 - C Language (default)\n 1 - C++\nInput (0 or 1) > ");
-     setProjectType(projData);
-     printf("\nSpecify directory for project (enter = current dir)\nInput (absolute) > ");
-     setProjectPath(projData);
+int createProject(ProjectData *data) {
      return 0;
 }
