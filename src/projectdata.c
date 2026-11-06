@@ -109,11 +109,7 @@ void printProjectData(ProjectData *data) {
 int createProject(ProjectData *data) {
      mode_t mode = 0755;
      printf("Creating directory of project...\n");
-     printf("before: %p '%s'\n", (void*)data->pathdata->path, data->pathdata->path);
-
-     
      int pathId = createProjectPath(data->pathdata->path, mode, data->name);
-     printf("after:  %p '%s'\n", (void*)data->pathdata->path, data->pathdata->path);
      printf(GREEN "[+] Project dir created!\n -- %s\n" RESET, data->pathdata->path);
    
      return 0;

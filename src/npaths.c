@@ -34,7 +34,7 @@ int createProjectPath(char *path, mode_t mode, char *name) {
     }
     
     strncpy(temp_path, path, sizeof(temp_path));
-    printf("Copied path: %s\n", temp_path);
+
     for (size_t i = 0; i < len; i++) {
         if (temp_path[i] == '/' && i > 0) {
             temp_path[i] = '\0';
