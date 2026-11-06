@@ -2,7 +2,7 @@
 #include <unistd.h>
 #include "../include/projectdata.h"
 #include <stdlib.h>
-
+#include "../include/cmakefill.h"
 int main() {
      ProjectData *projData = (ProjectData *)calloc(1, sizeof(ProjectData));
      printf("New project creation...\n");
@@ -13,7 +13,9 @@ int main() {
      setProjectPath(projData);
      printf("\nShould project use CMake tool?\n 0 - No\n 1 - Yes (default)\nInput (0 or 1) > ");
      setUseCmake(projData);
-     int success = createProject(projData);
+     // mock
+     //CMakeCreateConfig(projData);
+     createProject(projData);
      return 0;
     
 }

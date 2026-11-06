@@ -2,6 +2,7 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <string.h>
+#include <sys/stat.h>
 #include <unistd.h>
 #include <stdlib.h>
 
@@ -28,6 +29,7 @@ void setProjectName(ProjectData *data) {
                break;
           }
      }
+     nameBuff[strcspn(nameBuff, "\n")] = '\0';
      data->name = nameBuff;
      printf(GREEN "[+] Set Project Name: %s\n" RESET, nameBuff);
 }
@@ -61,11 +63,12 @@ void setProjectType(ProjectData *data) {
 }
 
 void setProjectPath(ProjectData *data) {
-     char buffer[1024];
-     PathData *pathData = pathCreate(&buffer[0], sizeof(buffer));
+     size_t bufSize = 1024;
+     char *buffer = (char*) calloc(bufSize, sizeof(char));
+     PathData *pathData = pathCreate(buffer, bufSize * sizeof(char));
      data->pathdata = pathData;
      if (pathData->path != NULL) {
-          printf(GREEN "[+] Set Project Directory: %s\n" RESET, pathData->path);
+          printf(GREEN "[+] Set Project Directory: %s\n" RESET, data->pathdata->path);
      }
 }
 
@@ -104,5 +107,14 @@ void printProjectData(ProjectData *data) {
 }
 
 int createProject(ProjectData *data) {
+     mode_t mode = 0755;
+     printf("Creating directory of project...\n");
+     printf("before: %p '%s'\n", (void*)data->pathdata->path, data->pathdata->path);
+
+     
+     int pathId = createProjectPath(data->pathdata->path, mode, data->name);
+     printf("after:  %p '%s'\n", (void*)data->pathdata->path, data->pathdata->path);
+     printf(GREEN "[+] Project dir created!\n -- %s\n" RESET, data->pathdata->path);
+   
      return 0;
 }

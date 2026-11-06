@@ -1,3 +1,4 @@
+#pragma once
 #include "npaths.h"
 #include <stdbool.h>
 

@@ -9,6 +9,7 @@ add_executable(newcpp
   src/main.c
   src/npaths.c
   src/projectdata.c
+  src/cmakefill.c
 )
 
 target_include_directories(newcpp PRIVATE
