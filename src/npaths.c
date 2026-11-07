@@ -12,8 +12,8 @@ PathData *pathCreate(char *buffer, size_t bufSize) {
           // if not specified
           getcwd(buffer, bufSize);
           printf("Directory not specified..\nUsing current working dir..\n--  %s\n", buffer);
-     }
-     else {
+     } else {
+          buffer[strcspn(buffer, "\n")] = '\0';
           printf("Using directory..\n--  %s\n", buffer);
      }
      PathData *data = (PathData*) calloc(1, sizeof(PathData));
