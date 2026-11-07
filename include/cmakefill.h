@@ -1,5 +1,5 @@
 #pragma once
 #include <stdio.h>
 #include "../include/projectdata.h"
-void CMakeCreateConfig(ProjectData *data);
+int CMakeCreateConfig(ProjectData *data);
 

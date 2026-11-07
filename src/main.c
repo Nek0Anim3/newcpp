@@ -13,8 +13,7 @@ int main() {
      setProjectPath(projData);
      printf("\nShould project use CMake tool?\n 0 - No\n 1 - Yes (default)\nInput (0 or 1) > ");
      setUseCmake(projData);
-     // mock
-     //CMakeCreateConfig(projData);
+    
      createProject(projData);
      return 0;
     

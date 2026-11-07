@@ -17,3 +17,4 @@ PathData* pathCreate(char *buffer, size_t bufSize);
 void pathFree(PathData* path);
 int createProjectPath(char *path, mode_t mode, char *name);
 int createDir(char *path, char *dirName);
+int createFile(char *path, char *filename, char *data);

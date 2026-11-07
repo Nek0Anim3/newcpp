@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <sys/stat.h>
 #include <unistd.h>
 #include <errno.h>
 
@@ -52,4 +53,30 @@ int createProjectPath(char *path, mode_t mode, char *name) {
     }
 
     return 0;
+}
+
+int createDir(char *path, char *dirName) {
+     char pathBuf[1024];
+     size_t pathSize = sizeof(pathBuf);
+     strncpy(pathBuf, path, pathSize);
+     strncat(pathBuf, "/", pathSize);
+     strncat(pathBuf, dirName, pathSize);
+
+     int result = mkdir(pathBuf, 0755);
+     return result;
+}
+
+int createFile(char *path, char *filename, char *data) {
+     char pathBuf[1024];
+     size_t pathSize = sizeof(pathBuf);
+     strncpy(pathBuf, path, pathSize);
+     strncat(pathBuf, "/", pathSize);
+     strncat(pathBuf, filename, pathSize);
+
+     FILE *fd;
+     fd = fopen(pathBuf, "w");
+     if (fd == NULL) return -1;
+     fprintf(fd, data);
+     fclose(fd);
+     return 0;
 }
