@@ -174,14 +174,14 @@ int createProject(ProjectData *data) {
           printf("\n1)    cd %s/build\n", data->pathdata->path);
           printf("2)    cmake ..\n");
           printf("3)    cmake --build .\n");
-          printf("\n4) ./%s\n", data->name);
+          printf("4)    ./%s\n", data->name);
      } else {
           if (data->type == PTYPE_C) {
-               printf("Compiling --  gcc main.c -o main");
+               printf("\nCompiling --  gcc main.c -o main\n");
           } else {
-               printf("Compiling --  g++ main.cpp -o main");
+               printf("\nCompiling --  g++ main.cpp -o main\n");
           }
-          printf("\nRunning --  ./main\n");
+          printf("Running --  ./main\n");
      }
     
      return 0;
